@@ -317,10 +317,7 @@ public class SmbTransport extends Transport implements SmbConstants {
         SmbComNegotiateResponse resp = new SmbComNegotiateResponse( server );
         try {
             negotiate( port, resp );
-        } catch( ConnectException ce ) {
-            port = (port == 0 || port == DEFAULT_PORT) ? 139 : DEFAULT_PORT;
-            negotiate( port, resp );
-        } catch( NoRouteToHostException nr ) {
+        } catch( IOException e ) {
             port = (port == 0 || port == DEFAULT_PORT) ? 139 : DEFAULT_PORT;
             negotiate( port, resp );
         }
